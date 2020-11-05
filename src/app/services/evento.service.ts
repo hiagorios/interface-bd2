@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as Knex from 'knex';
 import { Evento } from '../model/evento';
 
 @Injectable({
@@ -6,10 +7,13 @@ import { Evento } from '../model/evento';
 })
 export class EventoService {
 
-  constructor() { }
+  constructor(
+    private knex: Knex
+  ) { }
 
   findAllAvailable(): Evento[] {
     // TODO
+    this.knex.raw('Select');
     return [];
   }
 }
