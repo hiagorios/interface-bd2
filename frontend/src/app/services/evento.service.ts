@@ -14,6 +14,10 @@ export class EventoService {
     private http: HttpClient
   ) { }
 
+  findAll(): Observable<Evento[]>{
+    return this.http.get<Evento[]>(`http://localhost:3000/events`);
+  }
+
   findAllAvailable(): Observable<Evento[]>{
     return this.http.get<Evento[]>(`http://localhost:3000/events/available`);
   }

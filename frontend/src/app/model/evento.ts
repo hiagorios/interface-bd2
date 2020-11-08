@@ -1,7 +1,7 @@
 export interface Evento {
   id: number;
-  id_evento_pai: number | null,
-  id_organizador: number,
+  id_evento_pai: number | null;
+  id_organizador: number;
   nome: string;
   descricao: string;
   data_inicio: Date;
