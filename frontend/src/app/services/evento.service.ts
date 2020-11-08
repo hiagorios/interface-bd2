@@ -1,32 +1,30 @@
 import { Injectable } from '@angular/core';
-import * as Knex from 'knex';
 import { Evento } from '../model/evento';
 import queries from '../model/queries';
+import db from './connection';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventoService {
 
-  constructor(
-    private knex: Knex
-  ) { }
+  constructor() { }
 
   findAllAvailable(): Evento[] {
     // TODO
-    this.knex.raw(queries.evento.findAvailable);
+    db.raw(queries.evento.findAvailable);
     return [];
   }
 
   createEvento(evento: Evento): void {
-    this.knex.raw(queries.evento.create);
+    db.raw(queries.evento.create);
   }
 
   updateEvento(evento: Evento): void {
-    this.knex.raw(queries.evento.update);
+    db.raw(queries.evento.update);
   }
 
   deleteEvento(evento: Evento): void {
-    this.knex.raw(queries.evento.delete);
+    db.raw(queries.evento.delete);
   }
 }

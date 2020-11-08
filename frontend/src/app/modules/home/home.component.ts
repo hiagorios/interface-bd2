@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.eventos = this.eventoService.findAllAvailable();
+    console.log(this.eventos);
   }
 
 }
