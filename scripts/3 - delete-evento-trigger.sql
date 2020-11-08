@@ -1,7 +1,32 @@
-CREATE OR REPLACE FUNCTION delete_evento_trigger_func() RETURNS trigger AS
-$$ BEGIN
-	DELETE FROM ministrante_evento where id_evento = OLD.id;
-	DELETE FROM participante_evento where id_evento = OLD.id;
+CREATE OR REPLACE FUNCTION delete_evento_trigger_func() RETURNS TRIGGER AS
+$$ 
+DECLARE cursor_ministrante CURSOR FOR SELECT * FROM ministrante_evento WHERE id_evento = OLD.id;
+		cursor_participante CURSOR FOR SELECT * FROM participante_evento WHERE id_evento = OLD.id;
+		rec_ministrante record;
+		rec_participante record;
+
+BEGIN
+	DELETE FROM ministrante_evento WHERE id_evento = OLD.id;
+	DELETE FROM participante_evento WHERE id_evento = OLD.id;
+	
+	OPEN cursor_ministrante;
+	OPEN cursor_participante;
+	
+	FETCH cursor_ministrante INTO rec_ministrante;
+	WHILE (FOUND) LOOP
+		DELETE FROM ministrante_evento WHERE CURRENT OF cursor_ministrante;
+		FETCH cursor_ministrante INTO rec_ministrante;
+	END LOOP;
+	
+	FETCH cursor_participante INTO rec_participante;
+	WHILE (FOUND) LOOP
+		DELETE FROM participante_evento WHERE CURRENT OF cursor_participante;
+		FETCH cursor_participante INTO rec_participante;
+	END LOOP;
+	
+	CLOSE cursor_ministrante;
+	CLOSE cursor_participante;
+
 	RETURN OLD;
 END; $$ LANGUAGE 'plpgsql';
 
