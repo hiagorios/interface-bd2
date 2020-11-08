@@ -16,8 +16,11 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.eventos = this.eventoService.findAllAvailable();
-    console.log(this.eventos);
+    console.log('onInit');
+    this.eventoService.findAllAvailable().subscribe(res => {
+      this.eventos = res;
+      console.log(this.eventos);
+    });
   }
 
 }
