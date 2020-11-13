@@ -1,6 +1,6 @@
-insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('Hiago', 'hiago@gmail.com', '123456', 'Administrador', '62309507075');
-insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('João', 'joao@gmail.com', '123456', 'Organizador', '43569733050');
-insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('Tricia', 'tricia@gmail.com', '123456', 'Participante', '87721664012');
+insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('Hiago', 'hiago@gmail.com', '123456', 'A', '62309507075');
+insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('João', 'joao@gmail.com', '123456', 'O', '43569733050');
+insert into usuario (nome, email, senha, tipo_usuario, cpf) values ('Tricia', 'tricia@gmail.com', '123456', 'P', '87721664012');
 
 insert into ministrante (nome, email, formacao) values ('Fabio Alonso', 'fabio@gmail.com', 'Soldador de carro tunado');
 insert into ministrante (nome, email, formacao) values ('Igo Reis', 'igo@gmail.com', 'Graduado em Ciência da Computação, Especialista em Formatar PC');

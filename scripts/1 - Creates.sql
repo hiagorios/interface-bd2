@@ -17,7 +17,7 @@ create table usuario (
 	nome varchar(255) NOT NULL,
 	email varchar(255) unique NOT NULL,
 	senha varchar(255),
-	tipo_usuario varchar(255) NOT NULL,
+	tipo_usuario char(1) NOT NULL,
 	cpf char(11) unique NOT NULL
 );
 

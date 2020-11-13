@@ -25,7 +25,7 @@ eventRoutes.delete('/', async (request, response) => {
 });
 
 eventRoutes.get('/', async (request, response) => {
-    const result = await knex.raw(`select * from evento`).then();
+    const result = await knex.raw(`select * from evento where id_evento_pai is null`).then();
     return response.json(result.rows);
 });
 

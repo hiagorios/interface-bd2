@@ -1,0 +1,2 @@
+Inscrever o usuário no evento pai quando se inscreve no evento filho
+Evitar que um usuário se inscreva em dois eventos que vão ocorrer ao mesmo tempo

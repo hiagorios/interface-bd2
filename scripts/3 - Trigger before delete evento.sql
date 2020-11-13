@@ -1,3 +1,4 @@
+-- Ao deletar um evento, são removidas as linhas em ministrante_evento e participante_evento relacionadas.
 CREATE OR REPLACE FUNCTION delete_evento_trigger_func() RETURNS TRIGGER AS
 $$ 
 DECLARE cursor_ministrante CURSOR FOR SELECT * FROM ministrante_evento WHERE id_evento = OLD.id;
