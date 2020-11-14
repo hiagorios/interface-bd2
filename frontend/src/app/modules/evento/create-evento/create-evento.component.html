@@ -1,25 +1,61 @@
-<section class="create-evento-page d-flex justify-content-center align-items-center h-100">
+<section class="d-flex justify-content-center">
   <form class="mt-4 card p-4 w-50">
     <h2>Criar evento</h2>
     <div class="form-group">
       <label for="inputNome">Nome</label>
       <input type="email" class="form-control" id="inputNome" aria-describedby="nomeHelp"
-        placeholder="Insira o nome do evento">
-      <small id="nomeHelp" class="form-text text-muted">O nome não pode estar em branco</small>
+        placeholder="Dê um bom nome ao seu evento!">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="selectMinistrante">Ministrante</label>
+        <div class="form-row align-items-center">
+          <div class="col-12">
+            <select class="custom-select mr-sm-2" id="selectMinistrante">
+              <option selected>Escolher...</option>
+              <option *ngFor="let ministrante of ministrantes" value="{{ministrante.id}}">{{ ministrante.nome }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="selectEventoPai">Evento Pai</label>
+        <select class="form-control" id="selectEventoPai">
+          <option selected>Nenhum</option>
+          <option *ngFor="let evento of eventos" value="{{evento.id}}">{{ evento.nome }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-6 mb-2">Período do evento</div>
+      <div class="col-6 mb-2">Período de inscrição</div>
+      <div class="col-6">
+        Início do evento
+      </div>
+      <div class="col-6">
+        Início das inscrições
+      </div>
+      <div class="col-6">
+        Fim do evento
+      </div>
+      <div class="col-6">
+        Fim das inscrições
+      </div>
     </div>
     <div class="form-group">
       <label for="taDescricao">Descrição</label>
-      <textarea class="form-control" id="taDescricao" rows="3"></textarea>
+      <textarea class="form-control" id="taDescricao" rows="3"
+        placeholder="Descreva seu evento e deixe ele mais atrativo!"></textarea>
     </div>
     <div class="form-group">
       <label for="inputLocal">Local</label>
-      <input class="form-control" id="inputLocal" placeholder="Insira o local do evento">
+      <input class="form-control" id="inputLocal" placeholder="Onde seu evento irá ocorrer?">
     </div>
     <div class="form-group">
       <label for="inputPreco">Preço</label>
       <input class="form-control" id="inputPreco" placeholder="Insira o preço do evento">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-primary">Cadastrar evento</button>
   </form>
 
 </section>

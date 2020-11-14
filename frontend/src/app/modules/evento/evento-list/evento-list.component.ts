@@ -1,4 +1,4 @@
-import { EventoService } from './../../../services/evento.service';
+import { AppService } from '../../../services/app.service';
 import { Component, OnInit } from '@angular/core';
 import { Evento } from 'src/app/model/evento';
 
@@ -12,7 +12,7 @@ export class EventoListComponent implements OnInit {
   eventos: Evento[];
 
   constructor(
-    private service: EventoService
+    private service: AppService
   ) { }
 
   ngOnInit(): void {
