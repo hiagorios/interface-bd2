@@ -7,9 +7,6 @@ DECLARE cursor_ministrante CURSOR FOR SELECT * FROM ministrante_evento WHERE id_
 		rec_participante record;
 
 BEGIN
-	DELETE FROM ministrante_evento WHERE id_evento = OLD.id;
-	DELETE FROM participante_evento WHERE id_evento = OLD.id;
-	
 	OPEN cursor_ministrante;
 	OPEN cursor_participante;
 	

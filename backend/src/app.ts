@@ -1,8 +1,11 @@
 import express, { Router } from 'express';
-import eventRoutes from './event-routes';
+import eventoRoutes from './evento-routes';
 import cors from 'cors';
+import ministranteRoutes from './ministrante-routes';
+import usuarioRoutes from './usuario-routes';
 
 const app = express();
+app.disable("x-powered-by");
 const router = Router();
 
 const port = 3000;
@@ -25,12 +28,14 @@ const options: cors.CorsOptions = {
 
 router.use(cors(options));
 
-router.use('/events', eventRoutes);
+router.use('/eventos', eventoRoutes);
+router.use('/ministrantes', ministranteRoutes);
+router.use('/usuarios', usuarioRoutes);
 
 router.options('*', cors(options));
 
 app.get("/", (req, res) => {
-  res.send("Hello World")
+  res.send("Ô de casa")
 })
 
 app.use(router);
