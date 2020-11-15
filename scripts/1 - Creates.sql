@@ -9,8 +9,8 @@ create role organizador with login password '0rg4n1z4d0r';
 create role participante with login password 'p4r71c1p4n73';
 
 create database uesc_eventos with owner = administrador;
-
--- --------------------------------------------------------
+----------------------------------------------------------
+SET TIMEZONE TO 'America/Bahia';
 
 create table usuario (
 	id integer GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -34,13 +34,13 @@ create table evento (
 	id_organizador integer REFERENCES usuario(id) NOT NULL,
 	nome varchar(255) NOT NULL,
 	descricao text NOT NULL,
-	data_inicio timestamp NOT NULL,
-	data_fim timestamp NOT NULL,
+	data_inicio timestamp with time zone NOT NULL,
+	data_fim timestamp with time zone NOT NULL,
 	local varchar(255) NOT NULL,
 	preco float(2) NOT NULL,
 	qtd_vagas integer NOT NULL,
-	data_inicio_inscricao timestamp,
-	data_fim_inscricao timestamp
+	data_inicio_inscricao timestamp with time zone,
+	data_fim_inscricao timestamp with time zone
 );
 
 create table ministrante_evento (
@@ -60,4 +60,7 @@ grant insert, select, delete on table participante_evento to participante;
 grant insert, select, delete on table participante_evento to organizador;
 grant insert, select, update, delete on table ministrante to organizador;
 grant insert, select, delete on table ministrante_evento to organizador;
+grant select on table usuario to organizador;
 grant insert, select, update, delete on table evento to organizador;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO organizador;
+GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO participante;

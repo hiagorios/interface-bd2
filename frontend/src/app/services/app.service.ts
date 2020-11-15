@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Evento } from '../model/evento';
+import { Usuario } from '../model/usuario';
+import { EventoCreate } from '../model/evento-create';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +15,19 @@ export class AppService {
     private http: HttpClient
   ) { }
 
-  findAll(): Observable<Evento[]>{
+  findAllEventos(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`http://localhost:3000/eventos`);
   }
 
-  findAllAvailable(): Observable<Evento[]>{
+  findEventoById(id: number): Observable<Evento> {
+    return this.http.get<Evento>(`http://localhost:3000/eventos/id/${id}`);
+  }
+
+  findAllEventosDisponiveis(): Observable<Evento[]> {
     return this.http.get<Evento[]>(`http://localhost:3000/eventos/disponiveis`);
   }
 
-  createEvento(evento: Evento): Observable<Evento> {
+  createEvento(evento: EventoCreate): Observable<Evento> {
     return this.http.post<Evento>(`http://localhost:3000/eventos`, evento);
   }
 
@@ -29,15 +35,23 @@ export class AppService {
     return this.http.put<Evento>(`http://localhost:3000/eventos`, evento);
   }
 
-  deleteEvento(eventoId: number): Observable<Evento> {
-    return this.http.post<Evento>(`http://localhost:3000/eventos`, eventoId);
+  deleteEvento(eventoId: number) {
+    return this.http.delete(`http://localhost:3000/eventos/${eventoId}`);
   }
 
-  findMinistrantes(): Observable<Ministrante[]>{
+  findMinistrantes(): Observable<Ministrante[]> {
     return this.http.get<Ministrante[]>(`http://localhost:3000/ministrantes`);
   }
 
-  findUsuarioByID(id: number): Observable<Ministrante[]>{
-    return this.http.get<Ministrante[]>(`http://localhost:3000/usuarios/${id}`);
+  findMinistranteByEventoID(eventoId: number): Observable<Ministrante[]> {
+    return this.http.get<Ministrante[]>(`http://localhost:3000/ministrantes/evento/${eventoId}`);
+  }
+
+  findUsuarioByID(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(`http://localhost:3000/usuarios/${id}`);
+  }
+
+  getUsuarioAutenticadoID(): number {
+    return 3;
   }
 }

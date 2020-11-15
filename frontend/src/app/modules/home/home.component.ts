@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.service.findAllAvailable().subscribe(res => {
+    this.service.findAllEventosDisponiveis().subscribe(res => {
       this.eventos = res;
     });
   }

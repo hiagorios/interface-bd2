@@ -16,7 +16,18 @@ export class EventoListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.service.findAll().subscribe(res => {
+    this.buscarEventos();
+  }
+
+  deletarEvento(id: number): void {
+    this.service.deleteEvento(id).subscribe(() => {
+      console.log(`Evento deletado. ID ${id}`);
+      this.buscarEventos();
+    });
+  }
+
+  buscarEventos(): void {
+    this.service.findAllEventos().subscribe(res => {
       this.eventos = res;
     });
   }
