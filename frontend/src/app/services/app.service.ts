@@ -19,6 +19,10 @@ export class AppService {
     return this.http.get<Evento[]>(`http://localhost:3000/eventos`);
   }
 
+  findAllEventosExcluindo(idNot: number): Observable<Evento[]> {
+    return this.http.get<Evento[]>(`http://localhost:3000/eventos/idNot/${idNot}`);
+  }
+
   findEventoById(id: number): Observable<Evento> {
     return this.http.get<Evento>(`http://localhost:3000/eventos/id/${id}`);
   }

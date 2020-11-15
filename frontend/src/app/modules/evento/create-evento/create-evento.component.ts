@@ -36,22 +36,27 @@ export class CreateEventoComponent implements OnInit {
             this.inicializarForm(evento, ministrantes);
           });
         });
+        this.service.findAllEventosExcluindo(Number(id)).subscribe(res => {
+          this.eventos = res;
+        });
       } else {
+        this.service.findAllEventos().subscribe(res => {
+          this.eventos = res;
+        });
         this.inicializarForm();
       }
-    });
-    this.service.findMinistrantes().subscribe(res => {
-      this.ministrantes = res;
-    });
-    this.service.findAllEventos().subscribe(res => {
-      this.eventos = res;
+      this.service.findMinistrantes().subscribe(res => {
+        this.ministrantes = res;
+      });
     });
   }
 
   salvar(): void {
     if (this.eventoForm.valid) {
-      // this.convertDates();
-      console.log(this.eventoForm.value);
+      const stringId = this.eventoForm.controls['id_evento_pai'].value;
+      if (stringId){
+        this.eventoForm.controls['id_evento_pai'].setValue(Number(stringId));
+      }
       if (this.edicao) {
         this.service.updateEvento(this.eventoForm.value).subscribe(res => {
           console.log('Evento atualizado!');
@@ -67,16 +72,6 @@ export class CreateEventoComponent implements OnInit {
       alert('Formulário incompleto!');
     }
   }
-
-  // convertDates(): void {
-  //   ['data_inicio', 'data_inicio_inscricao', 'data_fim', 'data_fim_inscricao'].forEach(control => {
-  //     if (this.eventoForm.controls[control]) {
-  //       const data = this.eventoForm.controls[control].value as Date;
-  //       const userTimezoneOffset = data.getTimezoneOffset() * 60000;
-  //       this.eventoForm.controls[control].setValue(new Date(data.getTime() - userTimezoneOffset));
-  //     }
-  //   });
-  // }
 
   inicializarForm(evento?: Evento, ministrantes?: Ministrante[]): void {
     if (evento && ministrantes) {
