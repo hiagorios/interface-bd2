@@ -1,9 +1,0 @@
-Correções:
--Inserir ministrante junto com evento
--Pegar o nome do organizador pra mostrar na lista de eventos 
-
-
-
-Talvez fazer esses triggers:
--Inscrever o usuário no evento pai quando se inscreve no evento filho
--Evitar que um usuário se inscreva em dois eventos que vão ocorrer ao mesmo tempo

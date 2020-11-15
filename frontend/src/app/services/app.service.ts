@@ -1,3 +1,4 @@
+import { EventoList } from './../model/evento-list';
 import { Ministrante } from 'src/app/model/ministrante';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,8 +16,8 @@ export class AppService {
     private http: HttpClient
   ) { }
 
-  findAllEventos(): Observable<Evento[]> {
-    return this.http.get<Evento[]>(`http://localhost:3000/eventos`);
+  findAllEventos(): Observable<EventoList[]> {
+    return this.http.get<EventoList[]>(`http://localhost:3000/eventos`);
   }
 
   findAllEventosExcluindo(idNot: number): Observable<Evento[]> {

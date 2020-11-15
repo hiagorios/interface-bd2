@@ -8,11 +8,15 @@ const eventoRoutes = Router();
 eventoRoutes.post('/', (request, response) => {
     const body: EventoCreate = request.body;
     knex.raw(`
-    insert into evento (id_organizador, id_evento_pai, nome, descricao, data_inicio, data_fim,
-        local, preco, qtd_vagas, data_inicio_inscricao, data_fim_inscricao)
-        values (${body.id_organizador}, ${body.id_evento_pai}, '${body.nome}', '${body.descricao}',
-        '${body.data_inicio}', '${body.data_fim}', '${body.local}', ${body.preco}, ${body.qtd_vagas},
-        '${body.data_inicio_inscricao}', '${body.data_fim_inscricao}');
+    WITH evento_inserido AS (
+        insert into evento (id_organizador, id_evento_pai, nome, descricao, data_inicio, data_fim,
+            local, preco, qtd_vagas, data_inicio_inscricao, data_fim_inscricao)
+            values (${body.id_organizador}, ${body.id_evento_pai}, '${body.nome}', '${body.descricao}',
+            '${body.data_inicio}', '${body.data_fim}', '${body.local}', ${body.preco}, ${body.qtd_vagas},
+            '${body.data_inicio_inscricao}', '${body.data_fim_inscricao}')
+        RETURNING id
+     )
+     select insert_ministrantes_evento(array[${body.ids_ministrantes.toString()}], (SELECT id FROM evento_inserido));
     `).then(res => {
         response.json(res);
     }).catch(error => {
@@ -45,7 +49,10 @@ eventoRoutes.delete('/:id', (request, response) => {
 });
 
 eventoRoutes.get('/', (request, response) => {
-    knex.raw(`select * from evento;`).then(res => {
+    knex.raw(`
+        select e.*, u.nome as nome_organizador from evento e inner join usuario u on u.id = e.id_organizador
+        order by e.data_inicio;
+    `).then(res => {
         response.json(res.rows);
     }).catch(error => {
         console.log(error);

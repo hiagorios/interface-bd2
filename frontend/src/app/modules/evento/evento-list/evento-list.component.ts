@@ -1,6 +1,6 @@
-import { AppService } from '../../../services/app.service';
 import { Component, OnInit } from '@angular/core';
-import { Evento } from 'src/app/model/evento';
+import { EventoList } from 'src/app/model/evento-list';
+import { AppService } from '../../../services/app.service';
 
 @Component({
   selector: 'app-evento-list',
@@ -9,7 +9,7 @@ import { Evento } from 'src/app/model/evento';
 })
 export class EventoListComponent implements OnInit {
 
-  eventos: Evento[];
+  eventos: EventoList[];
 
   constructor(
     private service: AppService
